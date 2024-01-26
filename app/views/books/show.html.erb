@@ -1,9 +1,10 @@
+<%= flash[:notice] %>
 <main>
   <h3>Book detail</h3>
   <table>
     <%= image_tag @user.get_profile_image(100,100) %>
-    <%= @user.name %>
-    <%= @book.title %>
+    <%= link_to @user.name, user_path(@user.id) %>
+    <%= link_to @book.title, @book_path %>
     <%= @book.body %>
     <% if @user == current_user %>
     <%= link_to 'Edit', edit_book_path(@book.id) %>
@@ -15,4 +16,4 @@
 
 </main>
 
-<%= render 'books/user_info', user: @user, book: @book  %>
+<%= render 'books/user_info', user: @user, book: @book_new  %>

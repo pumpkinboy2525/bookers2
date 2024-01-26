@@ -1,3 +1,14 @@
+<%= flash[:notice] %>
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "エラー") %>error prohibited this obj from being saved:</h2>
+    <ul>
+      <% @モデル名.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 <h2>Books</h2>
 <table>
   <tr>
