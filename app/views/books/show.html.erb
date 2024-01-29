@@ -1,22 +1,33 @@
 <%= flash[:notice] %>
 
-
-
 <main>
-  <h3>Book detail</h3>
-  <table>
-    <%= image_tag @book.user.get_profile_image(100,100) %>
-    <%= link_to @book.user.name, user_path(@book.user.id) %>
-    <%= link_to @book.title, @book_path %>
-    <%= @book.body %>
-    <% if @book.user == current_user %>
-    <%= link_to 'Edit', edit_book_path(@book.id) %>
-    <% end %>
-    <% if @book.user == current_user %>
-    <%= link_to 'Destroy', book_path(@book.id), method: :delete, "data-confirm" => "本当に消しますか？" %>
-    <% end %>
-  </table>
-
+  <p id="notice"></p>
+  <div class="container">
+    <div class="row">
+      <dv class="col-md-3">
+        <%= render 'books/user_info', user: @book.user, book: @book_new  %>
+      </dv>
+      <div class="offset-md-1 col-md-8">
+        <h3>Book detail</h3>
+        <table>
+          <%= link_to user_path(@book.user.id) do %>
+          <%= image_tag @book.user.get_profile_image(100,100) %>
+          <% end %>
+          <%= link_to @book.user.name, user_path(@book.user.id) %>
+          <%= link_to @book.title, @book_path %>
+          <%= @book.body %>
+          <% if @book.user == current_user %>
+            <%= link_to edit_book_path(@book.id), class: "btn btn-secondary", style: "background-color: green" do %>
+            Edit
+            <% end %>
+          <% end %>
+          <% if @book.user == current_user %>
+            <%= link_to book_path(@book.id), method: :delete, "data-confirm" => "Destroy？", class: "btn btn-secondary", style: "background-color: red" do %>
+            Destroy
+            <% end %>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
 </main>
-
-<%= render 'books/user_info', user: @book.user, book: @book_new  %>
